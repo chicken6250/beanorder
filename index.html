@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bean Among Us Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bean Among Us Order</h1>
+    </header>
+    <div class="container">
+        <h2>Order Your Bean Among Us</h2>
+        <p>Choose your preferred bean color:</p>
+        <form id="orderForm">
+            <label for="color">Color:</label>
+            <select id="color" name="color">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="pink">Pink</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="black">Black</option>
+                <option value="white">White</option>
+            </select>
+            <br><br>
+            <button type="button" onclick="playGame()">Play Game for Discount</button>
+            <p id="discountMessage"></p>
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+
+    <script>
+        function playGame() {
+            // Placeholder function for the discount game
+            // In a real scenario, you would implement a game using JavaScript
+            // For now, let's just provide a message indicating the discount
+            document.getElementById("discountMessage").innerText = "Congratulations! You've won a 10% discount!";
+        }
+    </script>
+</body>
+</html>
