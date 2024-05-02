@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bean Among Us Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #gameCanvas {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            cursor: pointer;
+        }
+        #target {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .among-us {
+            font-size: 50px;
+            line-height: 50px;
+            color: #FF0000; /* You can change the color here */
+            text-align: center;
+        }
+        .among-us:before {
+            content: '\1F47E\00A0'; /* Unicode for Among Us character */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bean Among Us Order</h1>
+    </header>
+    <div class="container">
+        <h2>Order Your Bean Among Us</h2>
+        <p>Choose your preferred bean type:</p>
+        <form id="orderForm">
+            <label for="type">Type:</label>
+            <select id="type" name="type">
+                <option value="plush">Plush</option>
+                <option value="plastic">Plastic</option>
+                <option value="metal">Metal</option>
+                <option value="fridge-parts">Fridge Parts</option> <!-- Added fridge parts option -->
+                <option value="edible">Edible</option> <!-- Added edible option -->
+            </select>
+            <br><br>
+            <button type="button" onclick="playGame()">Play Game for Discount</button>
+            <p id="discountMessage"></p>
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+    
+    <canvas id="gameCanvas"></canvas>
+    <div class="among-us"></div>
+
+    <script>
+        function playGame() {
+            var canvas = document.getElementById("gameCanvas");
+            var ctx = canvas.getContext("2d");
+
+            // Set canvas size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight * 0.5;
+
+            // Draw Among Us character
+            var img = new Image();
+            img.src = "among_us_character.png";
+            img.onload = function() {
+                ctx.drawImage(img, canvas.width / 2 - img.width / 2, canvas.height / 2 - img.height / 2);
+            };
+
+            // Add click event listener to canvas
+            canvas.addEventListener("click", function(event) {
+                var x = event.clientX - canvas.getBoundingClientRect().left;
+                var y = event.clientY - canvas.getBoundingClientRect().top;
+                var targetX = canvas.width / 2 - img.width / 2;
+                var targetY = canvas.height / 2 - img.height / 2;
+                var targetWidth = img.width;
+                var targetHeight = img.height;
+
+                // Check if click is within the bounds of the Among Us character
+                if (x >= targetX && x <= targetX + targetWidth && y >= targetY && y <= targetY + targetHeight) {
+                    document.getElementById("discountMessage").innerText = "Congratulations! You've won a 10% discount!";
+                }
+            });
+        }
+    </script>
+    <footer>
+        <p>For more information, visit our <a href="#">website</a>.</p>
+    </footer>
+</body>
+</html>
