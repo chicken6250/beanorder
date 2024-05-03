@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Game</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+      display: block;
+      margin: 0 auto;
+    }
+    
+    #welcomeMessage {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 24px;
+      display: none; /* initially hidden */
+    }
+  </style>
+</head>
+<body>
+  <div id="welcomeMessage">Welcome to Advanced Game</div>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js"></script>
+  <script>
+    // Define the sketch function
+    function sketch(p) {
+      let player;
+      
+      p.setup = function() {
+        p.createCanvas(800, 600);
+        player = new Player();
+        
+        // Show the welcome message for 4 seconds
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        welcomeMessage.style.display = 'block';
+        setTimeout(function() {
+          welcomeMessage.style.display = 'none';
+        }, 4000);
+      }
+      
+      p.draw = function() {
+        p.background(220);
+        player.update();
+        player.show();
+      }
+      
+      // Define the Player class
+      class Player {
+        constructor() {
+          this.x = p.width / 2;
+          this.y = p.height / 2;
+          this.speed = 5;
+        }
+        
+        update() {
+          if (p.keyIsDown(p.LEFT_ARROW)) {
+            this.x -= this.speed;
+          }
+          if (p.keyIsDown(p.RIGHT_ARROW)) {
+            this.x += this.speed;
+          }
+          if (p.keyIsDown(p.UP_ARROW)) {
+            this.y -= this.speed;
+          }
+          if (p.keyIsDown(p.DOWN_ARROW)) {
+            this.y += this.speed;
+          }
+        }
+        
+        show() {
+          p.fill(255, 0, 0);
+          p.ellipse(this.x, this.y, 50, 50);
+        }
+      }
+    }
+    
+    // Initialize the sketch
+    new p5(sketch, 'gameCanvas');
+  </script>
+</body>
+</html>
