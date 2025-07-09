@@ -1,9 +1,3 @@
--- Load the required libraries
-local http = require("http")
-local term = require("term")
-local peripheral = require("peripheral")
-local image = require("image")
-
 -- URL of the image
 local imageUrl = "https://raw.githubusercontent.com/chicken6250/beanorder/refs/heads/main/Screenshot%20from%202025-07-08%2023-59-29.png"
 
@@ -16,33 +10,32 @@ local function displayImage(url)
         return
     end
 
-    -- Save the image data
+    -- Read the image data
     local imageData = response.readAll()
     response.close()
 
-    -- Load the image into the monitor
-    local img = image.load(imageData)
-    if img then
-        -- Clear the monitor
-        term.clear()
-        term.setCursorPos(1, 1)
+    -- Save the image to a file
+    local file = fs.open("image.png", "w")
+    file.write(imageData)
+    file.close()
 
-        -- Display the image
-        image.draw(img, 1, 1)
-    else
-        print("Failed to load image.")
-    end
+    -- Load the image from the file and display it
+    local img = paintutils.loadImage("image.png")
+    paintutils.drawImage(img, 1, 1)
 end
 
--- Get the monitor peripheral
+-- Check if the monitor is available
 local monitor = peripheral.find("monitor")
 if monitor then
     -- Set the monitor to be the active term
     term.redirect(monitor)
+
+    -- Clear the monitor
+    term.clear()
+    term.setCursorPos(1, 1)
 
     -- Display the image
     displayImage(imageUrl)
 else
     print("No monitor found.")
 end
-
