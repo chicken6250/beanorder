@@ -24,18 +24,17 @@ local function displayImage(url)
     paintutils.drawImage(img, 1, 1)
 end
 
--- Check if the monitor is available
-local monitor = peripheral.find("monitor")
-if monitor then
-    -- Set the monitor to be the active term
-    term.redirect(monitor)
+-- Get the GPU peripheral
+local gpu = peripheral.find("gpu")
+if gpu then
+    -- Set the resolution of the monitor
+    gpu.setResolution(51, 19) -- Adjust based on your monitor's resolution
 
-    -- Clear the monitor
-    term.clear()
-    term.setCursorPos(1, 1)
+    -- Clear the screen
+    gpu.fill(1, 1, 51, 19, " ")
 
     -- Display the image
     displayImage(imageUrl)
 else
-    print("No monitor found.")
+    print("No GPU found.")
 end
